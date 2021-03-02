@@ -119,8 +119,8 @@ export class SimplisticTimerComponent implements OnInit {
       // console.log(step_value);
       start      = this.NormalizeToScale(i,450,100);
       end        = this.NormalizeToScale(f,450,100);
-      console.log("Start is: "+ start);
-      console.log("End is: "+ end);
+      // console.log("Start is: "+ start);
+      // console.log("End is: "+ end);
       let animateprogress = setInterval(()=>{
         // console.log("Current param value is: " + end)
           if(end==-450 || end < -450){
@@ -170,8 +170,7 @@ export class SimplisticTimerComponent implements OnInit {
   ngAfterViewInit(){
         // setTimeout(()=>{this.animate(); },5000);
         // console.log("Beginning timer for: " + this.minutes + ":" + this.seconds);
-        this.StartTimerANDAnimate();
-
+        setTimeout(()=>{this.StartTimerANDAnimate()},2000);
   }
 
 }
