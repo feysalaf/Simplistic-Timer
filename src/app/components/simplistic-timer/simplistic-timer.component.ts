@@ -27,6 +27,7 @@ export class SimplisticTimerComponent implements OnInit {
   @Input() minutes:number = 0;
   @Input() seconds:number = 0;
   stop = false;
+  showzero = false;
 
   // TODO: CHANGE OBJECT NAME, TOO CONFUSING WITH ANIMATION OBJECT NAME
   countdownObject = {
@@ -38,6 +39,13 @@ export class SimplisticTimerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  //show zeros method activates only if seconds < 9 else it stays false
+  //turning output to true will show the zeros in the timer
+  showZeroes(){
+    this.showzero = !this.showzero;
+    console.log(this.showzero);
   }
 
   //countdown helper methods
