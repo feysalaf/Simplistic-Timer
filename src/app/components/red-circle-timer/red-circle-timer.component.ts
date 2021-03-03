@@ -35,10 +35,25 @@ export class RedCircleTimerComponent implements OnInit {
     seconds:0
   }
 
-
   constructor() { }
-
   ngOnInit(): void {
+  }
+
+  //Methods to scaling the svg figure
+  CalculateZoom(){
+    console.log("");
+  }
+  CalculatePan(){
+    console.log("");
+  }
+  FindScreenSize(){
+    console.log("");
+  }
+  ScaleSvg(){
+    //find the screen width
+    //calculate the appropriate zoom and pan
+    //push new var values to html
+    console.log("");
   }
 
   //show zeros method activates only if seconds < 9 else it stays false
@@ -61,6 +76,9 @@ export class RedCircleTimerComponent implements OnInit {
     this.countdownObject['minutes'] = this.minutes;
     this.countdownObject['seconds'] = this.seconds;
     //keep routine running unless stop is true
+    //PASS 1 and PASS 2 contain the catch conditions for
+    //displaying the 0's when the seconds < 10 and hiding
+    //them when seconds > 10
     while(this.stop != true){
       //PASS 1
       if(this.seconds != 0){
@@ -107,9 +125,6 @@ export class RedCircleTimerComponent implements OnInit {
       await this.sleep(1000);
     }
   }
-
-
-
   //this method is used to allow usage of the animate function
   //using values between 0 and 100
   //It's simple normalization

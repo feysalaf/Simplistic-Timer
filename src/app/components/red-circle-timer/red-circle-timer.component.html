@@ -5,12 +5,15 @@
 
 <svg width=100% height=100% viewBox="-90 42 391 198" >
 
-    <text y="50" transform="translate(100)" font-family="FjallaRegular">
-         <tspan  x="15" text-anchor="middle"  dy="94" >
-           <tspan fill="#e1502e" font-size="50px">{{countdownObject.minutes}}</tspan>
-           <tspan fill="#e1502e" fill-opacity="0.7" font-size="11.5px">:</tspan>
-           <tspan *ngIf="showzero" fill="#e1502e" fill-opacity="0.7" font-size="11.5px">0</tspan>
-           <tspan fill="#e1502e" fill-opacity="0.7" font-size="11.5px">{{countdownObject.seconds}}s</tspan>
+    <text y="50" transform="translate(100)" >
+         <tspan  x="10.5" text-anchor="middle"  dy="70" >
+           <tspan fill="#CCCCCC"  font-family="Teko" font-size="8px">TIME REMAINING</tspan>
+         </tspan>
+         <tspan fill="Black"  x="10.5" text-anchor="middle"  dy="28" >
+           <tspan font-family="Spartan" font-size="25px">{{countdownObject.minutes}}</tspan>
+           <tspan     font-size="25px">:</tspan>
+           <tspan *ngIf="showzero"  font-family="Spartan" font-size="25px">0</tspan>
+           <tspan  font-family="Spartan" font-size="25px">{{countdownObject.seconds}}</tspan>
        </tspan>
      </text>
 
