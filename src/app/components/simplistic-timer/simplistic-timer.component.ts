@@ -27,7 +27,7 @@ export class SimplisticTimerComponent implements OnInit {
   @Input() minutes:number = 0;
   @Input() seconds:number = 0;
   stop = false;
-  showzero = false;
+  showzero = true;
 
   // TODO: CHANGE OBJECT NAME, TOO CONFUSING WITH ANIMATION OBJECT NAME
   countdownObject = {
@@ -44,9 +44,11 @@ export class SimplisticTimerComponent implements OnInit {
   //show zeros method activates only if seconds < 9 else it stays false
   //turning output to true will show the zeros in the timer
   showZeroes(){
-    this.showzero = !this.showzero;
-    console.log(this.showzero);
-  }
+    this.showzero = true;
+   }
+  hideZeroes(){
+    this.showzero = false;
+   }
 
   //countdown helper methods
   async sleep(ms: number) {
@@ -63,10 +65,19 @@ export class SimplisticTimerComponent implements OnInit {
       //PASS 1
       if(this.seconds != 0){
         this.seconds--;
+        if(this.seconds < 10){
+          this.showZeroes();
+        }
         this.countdownObject['seconds'] = this.seconds;
 
         if(this.seconds === 0 && this.minutes != 0){
           this.seconds = 59;
+          if(this.seconds < 10){
+            this.showZeroes();
+          }
+          else if(this.seconds > 10){
+            this.hideZeroes();
+          }
           this.countdownObject['seconds'] = this.seconds;
           this.minutes--;
           this.countdownObject['minutes'] = this.minutes;

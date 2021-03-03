@@ -1,13 +1,13 @@
-<div *ngIf="showzero">
-  <h2>Conditional element</h2>
-</div>
-<button (click)="showZeroes()"></button>
-
-<svg width=100%  viewBox="-53 51 321 151" preserveAspectRatio="none">
+ <svg width=100%  viewBox="-53 51 321 151" preserveAspectRatio="none">
 
 
     <text y="50" transform="translate(100)" font-family="FjallaRegular">
-         <tspan x="15" text-anchor="middle"  dy="94" ><tspan fill="#e1502e" font-size="50px">{{countdownObject.minutes}}</tspan><tspan fill="#e1502e" fill-opacity="0.7" font-size="11.5px">:{{countdownObject.seconds}}s</tspan></tspan>
+         <tspan  x="15" text-anchor="middle"  dy="94" >
+           <tspan fill="#e1502e" font-size="50px">{{countdownObject.minutes}}</tspan>
+           <tspan fill="#e1502e" fill-opacity="0.7" font-size="11.5px">:</tspan>
+           <tspan *ngIf="showzero" fill="#e1502e" fill-opacity="0.7" font-size="11.5px">0</tspan>
+           <tspan fill="#e1502e" fill-opacity="0.7" font-size="11.5px">{{countdownObject.seconds}}s</tspan>
+       </tspan>
      </text>
 
   <g
