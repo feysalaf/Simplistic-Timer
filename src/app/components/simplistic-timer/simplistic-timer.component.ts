@@ -68,6 +68,9 @@ export class SimplisticTimerComponent implements OnInit {
         if(this.seconds < 10){
           this.showZeroes();
         }
+        else if(this.seconds > 10){
+          this.hideZeroes();
+        }
         this.countdownObject['seconds'] = this.seconds;
 
         if(this.seconds === 0 && this.minutes != 0){
