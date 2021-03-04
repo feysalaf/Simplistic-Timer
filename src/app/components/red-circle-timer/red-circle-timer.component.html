@@ -1,10 +1,5 @@
-<!-- <svg
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"> -->
-<!-- Takes a 100 width and height-->
-<div #svgDiv style="border:1px solid green;height:100%;">
-<svg width=100% height=100% viewBox="-90 42 391 198" >
+<div   #svgDiv style="border:1px solid green;height:100%;">
+<svg width=100% height=100% [attr.viewBox]="viewBoxDimensions" >
 
     <text y="50" transform="translate(100)" >
          <tspan  x="10.5" text-anchor="middle"  dy="70" >

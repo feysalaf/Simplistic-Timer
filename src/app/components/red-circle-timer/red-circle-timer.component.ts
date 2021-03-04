@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, ViewChild , ElementRef } from '@angular/core';
-
-@Component({
+  @Component({
   selector: 'app-red-circle-timer',
   templateUrl: './red-circle-timer.component.html',
-  styleUrls: ['./red-circle-timer.component.scss']
-})
+  styleUrls: ['./red-circle-timer.component.scss'],
+ })
 export class RedCircleTimerComponent implements OnInit {
 
   //getting div dimensions
@@ -12,17 +11,46 @@ export class RedCircleTimerComponent implements OnInit {
 
   svgDiv: ElementRef;
 
+  //viewBox properties
+  viewBoxDimensions:string;
+  //default
+  viewBoxDimensions = '-90 42 391 198';
 
-  ngAfterViewInit(){
-        // setTimeout(()=>{this.animate(); },5000);
-        // console.log("Beginning timer for: " + this.minutes + ":" + this.seconds);
-        var width = this.svgDiv.nativeElement.offsetWidth;
-        var height = this.svgDiv.nativeElement.offsetHeight;
-        console.log('Width:' + width);
-        console.log('Height: ' + height);
+  svgConfig = {
+    fillSmall: '2 42 211 198',
+    fillLarge: '-90 42 391 198'
   }
 
+  parentDivDimensions = {
+    width:0,
+    height:0
+  }
 
+  fitAndScale(){
+    //get the current parent div dimensions
+    this.parentDivDimensions.width = this.svgDiv.nativeElement.offsetWidth;
+    this.parentDivDimensions.height = this.svgDiv.nativeElement.offsetHeight;
+    //log them
+    console.log("The parent div width is: " + this.parentDivDimensions.width);
+    console.log("The parent div width is: " + this.parentDivDimensions.height);
+    //if parent div width > 1300 push big config else small
+    if(this.parentDivDimensions.width > 1300 && this.parentDivDimensions.height > 500){
+      this.viewBoxDimensions = this.svgConfig.fillLarge;
+      console.log("Pushing large config");
+    }
+    else if(this.parentDivDimensions.width < 1000 && this.parentDivDimensions.height < 1000){
+      this.viewBoxDimensions = this.svgConfig.fillSmall;
+      console.log("Pushing small config");
+    }
+  }
+  ngOnInit(): void {
+  }
+  ngAfterViewInit(){
+        setTimeout(()=>{
+                        this.fitAndScale();
+                        this.StartTimerANDAnimate()}
+        ,400);
+      }
   //this is a data object used to hold all the
   //data for communication between html and ts
   //it passes by reference and hence value changes
@@ -52,10 +80,7 @@ export class RedCircleTimerComponent implements OnInit {
   }
 
   constructor() { }
-  ngOnInit(): void {
-    setTimeout(()=>{this.StartTimerANDAnimate()},2000);
 
-  }
 
   //Methods to scaling the svg figure
   CalculateZoom(){
