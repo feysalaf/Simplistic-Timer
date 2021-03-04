@@ -12,9 +12,8 @@ export class RedCircleTimerComponent implements OnInit {
   svgDiv: ElementRef;
 
   //viewBox properties
-  viewBoxDimensions:string;
+  viewBoxDimensions:string = '-90 42 391 198';
   //default
-  viewBoxDimensions = '-90 42 391 198';
 
   svgConfig = {
     fillSmall: '2 42 211 198',
@@ -30,18 +29,14 @@ export class RedCircleTimerComponent implements OnInit {
     //get the current parent div dimensions
     this.parentDivDimensions.width = this.svgDiv.nativeElement.offsetWidth;
     this.parentDivDimensions.height = this.svgDiv.nativeElement.offsetHeight;
-    //log them
-    console.log("The parent div width is: " + this.parentDivDimensions.width);
-    console.log("The parent div width is: " + this.parentDivDimensions.height);
+   
     //if parent div width > 1300 push big config else small
     if(this.parentDivDimensions.width > 1300 && this.parentDivDimensions.height > 500){
       this.viewBoxDimensions = this.svgConfig.fillLarge;
-      console.log("Pushing large config");
-    }
+     }
     else if(this.parentDivDimensions.width < 1000 && this.parentDivDimensions.height < 1000){
       this.viewBoxDimensions = this.svgConfig.fillSmall;
-      console.log("Pushing small config");
-    }
+     }
   }
   ngOnInit(): void {
   }

@@ -1,11 +1,9 @@
-<div   #svgDiv style="border:1px solid green;height:100%;">
+<div   #svgDiv style="height:100%;">
 <svg width=100% height=100% [attr.viewBox]="viewBoxDimensions" >
 
     <text y="50" transform="translate(100)" >
-         <tspan  x="10.5" text-anchor="middle"  dy="70" >
-           <tspan fill="#CCCCCC"  font-family="Teko" font-size="8px">TIME REMAINING</tspan>
-         </tspan>
-         <tspan fill="Black"  x="10.5" text-anchor="middle"  dy="28" >
+
+         <tspan fill="Black"  x="10.5" text-anchor="middle"  dy="97" >
            <tspan font-family="Spartan" font-size="25px">{{countdownObject.minutes}}</tspan>
            <tspan     font-size="25px">:</tspan>
            <tspan *ngIf="showzero"  font-family="Spartan" font-size="25px">0</tspan>
