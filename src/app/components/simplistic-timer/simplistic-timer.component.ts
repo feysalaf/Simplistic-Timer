@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild , ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-simplistic-timer',
@@ -6,6 +6,52 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./simplistic-timer.component.scss']
 })
 export class SimplisticTimerComponent implements OnInit {
+  //getting div dimensions
+  @ViewChild('svgDiv')
+
+  svgDiv: ElementRef;
+
+  //viewBox properties
+  viewBoxDimensions:string = '-90 42 391 198';
+  //default
+
+  svgConfig = {
+    fillSmall: '2 42 211 198',
+    fillLarge: '-90 42 391 198'
+  }
+
+  parentDivDimensions = {
+    width:0,
+    height:0
+  }
+
+  fitAndScale(){
+    //get the current parent div dimensions
+    this.parentDivDimensions.width = this.svgDiv.nativeElement.offsetWidth;
+    this.parentDivDimensions.height = this.svgDiv.nativeElement.offsetHeight;
+
+    //if parent div width > 1300 push big config else small
+    if(this.parentDivDimensions.width > 1300 && this.parentDivDimensions.height > 1100){
+      this.viewBoxDimensions = this.svgConfig.fillLarge;
+      console.log("Pushing larger config");
+     }
+    else if(this.parentDivDimensions.width < 1000 && this.parentDivDimensions.height < 1000){
+      this.viewBoxDimensions = this.svgConfig.fillSmall;
+      console.log("Pushing smaller config");
+
+     }
+  }
+
+
+    ngOnInit(): void {
+    }
+
+    ngAfterViewInit(){
+            setTimeout(()=>{
+                            this.fitAndScale();
+                            this.StartTimerANDAnimate()}
+            ,400);
+    }
 
   //this is a data object used to hold all the
   //data for communication between html and ts
@@ -38,8 +84,6 @@ export class SimplisticTimerComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 
   //show zeros method activates only if seconds < 9 else it stays false
   //turning output to true will show the zeros in the timer
@@ -189,10 +233,5 @@ export class SimplisticTimerComponent implements OnInit {
     this.startTimer();
   }
 
-  ngAfterViewInit(){
-        // setTimeout(()=>{this.animate(); },5000);
-        // console.log("Beginning timer for: " + this.minutes + ":" + this.seconds);
-        setTimeout(()=>{this.StartTimerANDAnimate()},2000);
-  }
 
 }
