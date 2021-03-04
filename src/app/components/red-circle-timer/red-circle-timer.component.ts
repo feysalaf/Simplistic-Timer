@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild , ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-red-circle-timer',
@@ -6,6 +6,22 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./red-circle-timer.component.scss']
 })
 export class RedCircleTimerComponent implements OnInit {
+
+  //getting div dimensions
+  @ViewChild('svgDiv')
+
+  svgDiv: ElementRef;
+
+
+  ngAfterViewInit(){
+        // setTimeout(()=>{this.animate(); },5000);
+        // console.log("Beginning timer for: " + this.minutes + ":" + this.seconds);
+        var width = this.svgDiv.nativeElement.offsetWidth;
+        var height = this.svgDiv.nativeElement.offsetHeight;
+        console.log('Width:' + width);
+        console.log('Height: ' + height);
+  }
+
 
   //this is a data object used to hold all the
   //data for communication between html and ts
@@ -37,6 +53,8 @@ export class RedCircleTimerComponent implements OnInit {
 
   constructor() { }
   ngOnInit(): void {
+    setTimeout(()=>{this.StartTimerANDAnimate()},2000);
+
   }
 
   //Methods to scaling the svg figure
@@ -204,10 +222,5 @@ export class RedCircleTimerComponent implements OnInit {
     this.startTimer();
   }
 
-  ngAfterViewInit(){
-        // setTimeout(()=>{this.animate(); },5000);
-        // console.log("Beginning timer for: " + this.minutes + ":" + this.seconds);
-        setTimeout(()=>{this.StartTimerANDAnimate()},2000);
-  }
 
 }
