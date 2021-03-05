@@ -12,12 +12,13 @@ export class SimplisticTimerComponent implements OnInit {
   svgDiv: ElementRef;
 
   //viewBox properties
-  viewBoxDimensions:string = '-90 42 391 198';
+  viewBoxDimensions:string = '-85 42 391 198';
   //default
 
   svgConfig = {
-    fillSmall: '2 42 211 198',
-    fillLarge: '-90 42 391 198'
+    fillSmall: '8 42 211 198',
+    fillLarge: '-85 42 391 198',
+    fillVertical: '8 -102 211 328'
   }
 
   parentDivDimensions = {
@@ -25,32 +26,57 @@ export class SimplisticTimerComponent implements OnInit {
     height:0
   }
 
+  tabcheck = false;
+
+  isHidden(){
+    document.addEventListener(
+      "visibilitychange"
+        , () => {
+          if (document.hidden) {
+               this.tabcheck = true;
+          }else{
+               this.tabcheck = false;
+            }
+          }
+        );
+
+  }
+
   fitAndScale(){
     //get the current parent div dimensions
     this.parentDivDimensions.width = this.svgDiv.nativeElement.offsetWidth;
     this.parentDivDimensions.height = this.svgDiv.nativeElement.offsetHeight;
-
+    console.log(this.parentDivDimensions.width);
+    console.log(this.parentDivDimensions.height);
     //if parent div width > 1300 push big config else small
-    if(this.parentDivDimensions.width > 1300 && this.parentDivDimensions.height > 1100){
+    if(this.parentDivDimensions.width > 1300 && this.parentDivDimensions.height > 900){
       this.viewBoxDimensions = this.svgConfig.fillLarge;
-      console.log("Pushing larger config");
+      // console.log("Pushing larger config");
      }
-    else if(this.parentDivDimensions.width < 1000 && this.parentDivDimensions.height < 1000){
+    else if(this.parentDivDimensions.width < 1000 && this.parentDivDimensions.width > 300 &&
+            this.parentDivDimensions.height < 1000 && this.parentDivDimensions.height > 200){
       this.viewBoxDimensions = this.svgConfig.fillSmall;
-      console.log("Pushing smaller config");
-
+      // console.log("Pushing smaller config");
      }
+    //for vertical displays
+    else if(this.parentDivDimensions.width < 500 && this.parentDivDimensions.height < 300){
+      this.viewBoxDimensions = this.svgConfig.fillVertical;
+      // console.log("Pushing phone config")
+    }
   }
 
 
     ngOnInit(): void {
+
+      setTimeout(()=>{
+                      this.isHidden();
+                      this.fitAndScale();
+                      this.StartTimerANDAnimate()}
+      ,400);
     }
 
     ngAfterViewInit(){
-            setTimeout(()=>{
-                            this.fitAndScale();
-                            this.StartTimerANDAnimate()}
-            ,400);
+
     }
 
   //this is a data object used to hold all the
@@ -73,7 +99,7 @@ export class SimplisticTimerComponent implements OnInit {
   @Input() minutes:number = 0;
   @Input() seconds:number = 0;
   stop = false;
-  showzero = true;
+  showzero = false;
 
   // TODO: CHANGE OBJECT NAME, TOO CONFUSING WITH ANIMATION OBJECT NAME
   countdownObject = {
@@ -105,51 +131,54 @@ export class SimplisticTimerComponent implements OnInit {
     this.countdownObject['minutes'] = this.minutes;
     this.countdownObject['seconds'] = this.seconds;
     //keep routine running unless stop is true
-    while(this.stop != true){
-      //PASS 1
-      if(this.seconds != 0){
-        this.seconds--;
-        if(this.seconds < 10){
-          this.showZeroes();
-        }
-        else if(this.seconds > 10){
-          this.hideZeroes();
-        }
-        this.countdownObject['seconds'] = this.seconds;
-
-        if(this.seconds === 0 && this.minutes != 0){
-          this.seconds = 59;
-          if(this.seconds < 10){
-            this.showZeroes();
+    let timer = setInterval(()=>{
+          if(this.stop == true){
+            clearInterval(timer);
           }
-          else if(this.seconds > 10){
-            this.hideZeroes();
-          }
-          this.countdownObject['seconds'] = this.seconds;
-          this.minutes--;
-          this.countdownObject['minutes'] = this.minutes;
-        }
-        else if(this.seconds === 0 && this.minutes === 0 ){
-          this.stop = true;
-        }
-      }
-      //PASS 2
-      else if(this.seconds === 0 && this.minutes != 0){
-        this.seconds = 59;
-        this.minutes--;
-        this.countdownObject['minutes'] = this.minutes;
+          else if(this.tabcheck == false){
+          //PASS 1
+          if(this.seconds != 0){
+            this.seconds--;
+            if(this.seconds < 10){
+              this.showZeroes();
+            }
+            else if(this.seconds > 10){
+              this.hideZeroes();
+            }
+            this.countdownObject['seconds'] = this.seconds;
 
-      }
-      //PASS 3
-      else if(this.seconds === 0 && this.minutes === 0){
-        this.stop = true;
-        return;
-      }
-      else if(this.stop){
-      }
-      //fire function every 1s until terminate conditions are reached
-      await this.sleep(1000);
-    }
+            if(this.seconds === 0 && this.minutes != 0){
+              this.seconds = 59;
+              if(this.seconds < 10){
+                this.showZeroes();
+              }
+              else if(this.seconds > 10){
+                this.hideZeroes();
+              }
+              this.countdownObject['seconds'] = this.seconds;
+              this.minutes--;
+              this.countdownObject['minutes'] = this.minutes;
+            }
+            else if(this.seconds === 0 && this.minutes === 0 ){
+              this.stop = true;
+            }
+          }
+          //PASS 2
+          else if(this.seconds === 0 && this.minutes != 0){
+            this.seconds = 59;
+            this.minutes--;
+            this.countdownObject['minutes'] = this.minutes;
+
+          }
+          //PASS 3
+          else if(this.seconds === 0 && this.minutes === 0){
+            this.stop = true;
+            return;
+          }
+          else if(this.stop){
+          }
+    }},1000);
+
   }
 
 
@@ -165,8 +194,9 @@ export class SimplisticTimerComponent implements OnInit {
   //0.1522 is the optimum step for 1 min
   //here transformationfactor is found by solving
   //the equation for 0.1522
+  //0.7 prev optimum
   GenerateStepSize(input_seconds:number){
-    let scaledseconds = input_seconds - 0.7;
+    let scaledseconds = input_seconds ;
     let transformationfactor:number = 0.02029;
     return ((450/scaledseconds) * transformationfactor);
   }
@@ -192,7 +222,7 @@ export class SimplisticTimerComponent implements OnInit {
           if(end==-450 || end < -450){
             clearInterval(animateprogress);
           }
-          else{
+          else if(this.tabcheck == false){
             end = end - step_value;
             //the check here makes sure that if step value overflows
             //the arc length then no additional rendering is done

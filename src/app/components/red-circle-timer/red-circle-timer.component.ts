@@ -29,7 +29,7 @@ export class RedCircleTimerComponent implements OnInit {
     //get the current parent div dimensions
     this.parentDivDimensions.width = this.svgDiv.nativeElement.offsetWidth;
     this.parentDivDimensions.height = this.svgDiv.nativeElement.offsetHeight;
-   
+
     //if parent div width > 1300 push big config else small
     if(this.parentDivDimensions.width > 1300 && this.parentDivDimensions.height > 500){
       this.viewBoxDimensions = this.svgConfig.fillLarge;
@@ -38,10 +38,29 @@ export class RedCircleTimerComponent implements OnInit {
       this.viewBoxDimensions = this.svgConfig.fillSmall;
      }
   }
+
+  tabcheck = false;
+
+  isHidden(){
+    document.addEventListener(
+      "visibilitychange"
+        , () => {
+          if (document.hidden) {
+               this.tabcheck = true;
+          }else{
+               this.tabcheck = false;
+            }
+          }
+        );
+
+  }
+
+
   ngOnInit(): void {
   }
   ngAfterViewInit(){
         setTimeout(()=>{
+                        this.isHidden();
                         this.fitAndScale();
                         this.StartTimerANDAnimate()}
         ,400);
@@ -66,7 +85,7 @@ export class RedCircleTimerComponent implements OnInit {
   @Input() minutes:number = 0;
   @Input() seconds:number = 0;
   stop = false;
-  showzero = true;
+  showzero = false;
 
   // TODO: CHANGE OBJECT NAME, TOO CONFUSING WITH ANIMATION OBJECT NAME
   countdownObject = {
@@ -114,55 +133,57 @@ export class RedCircleTimerComponent implements OnInit {
     this.countdownObject['minutes'] = this.minutes;
     this.countdownObject['seconds'] = this.seconds;
     //keep routine running unless stop is true
-    //PASS 1 and PASS 2 contain the catch conditions for
-    //displaying the 0's when the seconds < 10 and hiding
-    //them when seconds > 10
-    while(this.stop != true){
-      //PASS 1
-      if(this.seconds != 0){
-        this.seconds--;
-        if(this.seconds < 10){
-          this.showZeroes();
-        }
-        else if(this.seconds > 10){
-          this.hideZeroes();
-        }
-        this.countdownObject['seconds'] = this.seconds;
-
-        if(this.seconds === 0 && this.minutes != 0){
-          this.seconds = 59;
-          if(this.seconds < 10){
-            this.showZeroes();
+    let timer = setInterval(()=>{
+          if(this.stop == true){
+            clearInterval(timer);
           }
-          else if(this.seconds > 10){
-            this.hideZeroes();
-          }
-          this.countdownObject['seconds'] = this.seconds;
-          this.minutes--;
-          this.countdownObject['minutes'] = this.minutes;
-        }
-        else if(this.seconds === 0 && this.minutes === 0 ){
-          this.stop = true;
-        }
-      }
-      //PASS 2
-      else if(this.seconds === 0 && this.minutes != 0){
-        this.seconds = 59;
-        this.minutes--;
-        this.countdownObject['minutes'] = this.minutes;
+          else if(this.tabcheck == false){
+          //PASS 1
+          if(this.seconds != 0){
+            this.seconds--;
+            if(this.seconds < 10){
+              this.showZeroes();
+            }
+            else if(this.seconds > 10){
+              this.hideZeroes();
+            }
+            this.countdownObject['seconds'] = this.seconds;
 
-      }
-      //PASS 3
-      else if(this.seconds === 0 && this.minutes === 0){
-        this.stop = true;
-        return;
-      }
-      else if(this.stop){
-      }
-      //fire function every 1s until terminate conditions are reached
-      await this.sleep(1000);
-    }
+            if(this.seconds === 0 && this.minutes != 0){
+              this.seconds = 59;
+              if(this.seconds < 10){
+                this.showZeroes();
+              }
+              else if(this.seconds > 10){
+                this.hideZeroes();
+              }
+              this.countdownObject['seconds'] = this.seconds;
+              this.minutes--;
+              this.countdownObject['minutes'] = this.minutes;
+            }
+            else if(this.seconds === 0 && this.minutes === 0 ){
+              this.stop = true;
+            }
+          }
+          //PASS 2
+          else if(this.seconds === 0 && this.minutes != 0){
+            this.seconds = 59;
+            this.minutes--;
+            this.countdownObject['minutes'] = this.minutes;
+
+          }
+          //PASS 3
+          else if(this.seconds === 0 && this.minutes === 0){
+            this.stop = true;
+            return;
+          }
+          else if(this.stop){
+          }
+    }},1000);
+
   }
+
+
   //this method is used to allow usage of the animate function
   //using values between 0 and 100
   //It's simple normalization
