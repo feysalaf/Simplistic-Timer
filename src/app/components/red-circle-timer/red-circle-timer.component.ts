@@ -183,7 +183,7 @@ export class RedCircleTimerComponent implements OnInit {
   //here transformationfactor is found by solving
   //the equation for 0.1522
   GenerateStepSize(input_seconds:number){
-    let scaledseconds = input_seconds - 0.7;
+    let scaledseconds = input_seconds;
     let transformationfactor:number = 0.02029;
     return ((450/scaledseconds) * transformationfactor);
   }
