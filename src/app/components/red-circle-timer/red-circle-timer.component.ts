@@ -63,7 +63,7 @@ export class RedCircleTimerComponent implements OnInit {
                         this.isHidden();
                         this.fitAndScale();
                         this.StartTimerANDAnimate()}
-        ,400);
+        ,1);
       }
   //this is a data object used to hold all the
   //data for communication between html and ts
@@ -94,25 +94,7 @@ export class RedCircleTimerComponent implements OnInit {
   }
 
   constructor() { }
-
-
-  //Methods to scaling the svg figure
-  CalculateZoom(){
-    console.log("");
-  }
-  CalculatePan(){
-    console.log("");
-  }
-  FindScreenSize(){
-    console.log("");
-  }
-  ScaleSvg(){
-    //find the screen width
-    //calculate the appropriate zoom and pan
-    //push new var values to html
-    console.log("");
-  }
-
+ 
   //show zeros method activates only if seconds < 9 else it stays false
   //turning output to true will show the zeros in the timer
   showZeroes(){
