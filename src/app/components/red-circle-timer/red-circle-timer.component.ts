@@ -37,6 +37,11 @@ export class RedCircleTimerComponent implements OnInit {
     else if(this.parentDivDimensions.width < 1000 && this.parentDivDimensions.height < 1000){
       this.viewBoxDimensions = this.svgConfig.fillSmall;
      }
+     //for vertical displays
+     else if(this.parentDivDimensions.width < 500 && this.parentDivDimensions.height < 300){
+       this.viewBoxDimensions = this.svgConfig.fillVertical;
+       // console.log("Pushing phone config")
+     }
   }
 
   tabcheck = false;
@@ -94,7 +99,7 @@ export class RedCircleTimerComponent implements OnInit {
   }
 
   constructor() { }
- 
+
   //show zeros method activates only if seconds < 9 else it stays false
   //turning output to true will show the zeros in the timer
   showZeroes(){
