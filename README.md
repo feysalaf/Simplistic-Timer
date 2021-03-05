@@ -11,7 +11,7 @@ Both timers have different aesthetic styles. They are meant to be used as a comp
   <img src="https://github.com/feysalaf/Simplistic-Timer/blob/master/docs/readme/SimplisticTimer.png" width="1920" height="450"  title="hover text">
 </p>
 <p align="center">
-  <img src="https://github.com/feysalaf/Simplistic-Timer/blob/master/docs/readme/RedCircleTimer.png" width="1920" height="450"  title="hover text">
+  <img src="https://github.com/feysalaf/Simplistic-Timer/blob/master/docs/readme/RedCircleTimer.png" width="1920" height="550"  title="hover text">
 </p>
 
 
