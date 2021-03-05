@@ -9,18 +9,10 @@ This project contains two timers:
 Both timers have different aesthetic styles and are made entirely using typescript and svg. This allows for pixel perfect scaling and smooth animations. They are meant to be used as a component in other angular projects. 
 
 <p align="center">
-  <img src="https://github.com/feysalaf/Simplistic-Timer/blob/master/docs/readme/SimplisticTimer.png" width="460" height="300" title="hover text">
-  <img src="https://github.com/feysalaf/Simplistic-Timer/blob/master/docs/readme/RedCircleTimer.png" width="460" height="300" alt="accessibility text">
+  <img src="https://github.com/feysalaf/Simplistic-Timer/blob/master/docs/readme/SimplisticTimer.png" width="470" height="300">
+  <img src="https://github.com/feysalaf/Simplistic-Timer/blob/master/docs/readme/RedCircleTimer.png" width="470" height="300">
 </p>
- 
- 
-<p align="center">
-  <img src="https://github.com/feysalaf/Simplistic-Timer/blob/master/docs/readme/SimplisticTimer.png" width="1920" height="550"  title="hover text">
-</p>
-<p align="center" >
-  <img  src="https://github.com/feysalaf/Simplistic-Timer/blob/master/docs/readme/RedCircleTimer.png" width="1920" height="600"  title="hover text">
-</p>
-
+  
 
 ## Usage
 
