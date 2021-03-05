@@ -46,8 +46,8 @@ export class SimplisticTimerComponent implements OnInit {
     //get the current parent div dimensions
     this.parentDivDimensions.width = this.svgDiv.nativeElement.offsetWidth;
     this.parentDivDimensions.height = this.svgDiv.nativeElement.offsetHeight;
-    console.log(this.parentDivDimensions.width);
-    console.log(this.parentDivDimensions.height);
+    // console.log(this.parentDivDimensions.width);
+    // console.log(this.parentDivDimensions.height);
     //if parent div width > 1300 push big config else small
     if(this.parentDivDimensions.width > 1300 && this.parentDivDimensions.height > 900){
       this.viewBoxDimensions = this.svgConfig.fillLarge;
@@ -72,7 +72,7 @@ export class SimplisticTimerComponent implements OnInit {
                       this.isHidden();
                       this.fitAndScale();
                       this.StartTimerANDAnimate()}
-      ,400);
+      ,1);
     }
 
     ngAfterViewInit(){
