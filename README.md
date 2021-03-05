@@ -6,7 +6,7 @@ This project contains two timers:
 
 * Red Circle Timer
 
-Both timers have different aesthetic styles. They are meant to be used as a component in other angular projects. 
+Both timers have different aesthetic styles and are made entirely using typescript and svg. This allows for pixel perfect scaling and smooth animations. They are meant to be used as a component in other angular projects. 
 <p align="center">
   <img src="https://github.com/feysalaf/Simplistic-Timer/blob/master/docs/readme/SimplisticTimer.png" width="1920" height="550"  title="hover text">
 </p>
