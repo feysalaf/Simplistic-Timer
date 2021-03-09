@@ -18,7 +18,8 @@ export class RedCircleTimerComponent implements OnInit {
   svgConfig = {
     fillSmall: '8 42 211 198',
     fillLarge: '-85 42 391 198',
-    fillVertical: '1.5 -102 211 328'
+    fillVertical: '1.5 -102 211 328',
+    fillcustom1: '1.5 40 211 198'
   }
 
 
@@ -35,7 +36,7 @@ export class RedCircleTimerComponent implements OnInit {
     //if parent div width > 1300 push big config else small
     if(this.parentDivDimensions.width > 1300 && this.parentDivDimensions.height > 500){
       this.viewBoxDimensions = this.svgConfig.fillLarge;
- 
+
      }
     else if(this.parentDivDimensions.width < 1000 && this.parentDivDimensions.width > 300 &&
             this.parentDivDimensions.height < 1000 && this.parentDivDimensions.height > 200){
@@ -43,8 +44,13 @@ export class RedCircleTimerComponent implements OnInit {
 
      }
      //for vertical displays
-     else if(this.parentDivDimensions.width < 500 && this.parentDivDimensions.height < 300){
+     else if(this.parentDivDimensions.width < 500 && this.parentDivDimensions.height < 300 &&
+              this.parentDivDimensions.width > 250 && this.parentDivDimensions.height > 300){
        this.viewBoxDimensions = this.svgConfig.fillVertical;
+      }
+     //custom configs
+     else if(this.parentDivDimensions.width < 220 && this.parentDivDimensions.height < 300){
+       this.viewBoxDimensions = this.svgConfig.fillcustom1;
       }
   }
 

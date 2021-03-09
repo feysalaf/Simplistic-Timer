@@ -18,7 +18,9 @@ export class SimplisticTimerComponent implements OnInit {
   svgConfig = {
     fillSmall: '8 42 211 198',
     fillLarge: '-85 42 391 198',
-    fillVertical: '8 -102 211 328'
+    fillVertical: '8 -102 211 328',
+    fillcustom1: '5.5 30 211 198'
+
   }
 
   parentDivDimensions = {
@@ -59,10 +61,15 @@ export class SimplisticTimerComponent implements OnInit {
       // console.log("Pushing smaller config");
      }
     //for vertical displays
-    else if(this.parentDivDimensions.width < 500 && this.parentDivDimensions.height < 300){
+    else if(this.parentDivDimensions.width < 500 && this.parentDivDimensions.height < 300 &&
+             this.parentDivDimensions.width > 250 && this.parentDivDimensions.height > 300){
       this.viewBoxDimensions = this.svgConfig.fillVertical;
       // console.log("Pushing phone config")
     }
+    //custom configs
+    else if(this.parentDivDimensions.width < 220 && this.parentDivDimensions.height < 300){
+      this.viewBoxDimensions = this.svgConfig.fillcustom1;
+     }
   }
 
 
