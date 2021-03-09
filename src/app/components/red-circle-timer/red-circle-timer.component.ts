@@ -35,20 +35,17 @@ export class RedCircleTimerComponent implements OnInit {
     //if parent div width > 1300 push big config else small
     if(this.parentDivDimensions.width > 1300 && this.parentDivDimensions.height > 500){
       this.viewBoxDimensions = this.svgConfig.fillLarge;
-      console.log("Pushing 213 config")
-
+ 
      }
     else if(this.parentDivDimensions.width < 1000 && this.parentDivDimensions.width > 300 &&
             this.parentDivDimensions.height < 1000 && this.parentDivDimensions.height > 200){
       this.viewBoxDimensions = this.svgConfig.fillSmall;
-      console.log("Pushing sad config")
 
      }
      //for vertical displays
      else if(this.parentDivDimensions.width < 500 && this.parentDivDimensions.height < 300){
        this.viewBoxDimensions = this.svgConfig.fillVertical;
-       console.log("Pushing phone config")
-     }
+      }
   }
 
   tabcheck = false;
