@@ -1,5 +1,9 @@
-<div  #svgDiv style="height:100%;">
- <svg width=100% height=100% [attr.viewBox]="viewBoxDimensions" >
+<div   #svgDiv style="height:100%;">
+
+  <svg width=100% height=100%  [attr.viewBox]="viewBoxDimensions">
+
+
+    <g [attr.transform]="baseTransform">
 
 
     <text y="50" transform="translate(100)" font-family="FjallaRegular">
@@ -10,7 +14,6 @@
            <tspan fill="#e1502e" fill-opacity="0.7" font-size="11.5px">{{countdownObject.seconds}}s</tspan>
        </tspan>
      </text>
-
   <g
      inkscape:groupmode="layer"
      id="layer6"
@@ -521,6 +524,7 @@
        sodipodi:open="true"
        d="m 111.94254,58.688389 a 71.27446,70.875526 0 0 1 72.27337,69.862481 71.27446,70.875526 0 0 1 -70.25008,71.87429 71.27446,70.875526 0 0 1 -72.28432,-69.85127 71.27446,70.875526 0 0 1 70.23881,-71.885185" />
   </g>
-</svg>
+</g>
 
+</svg>
 </div>

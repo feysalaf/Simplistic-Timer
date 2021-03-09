@@ -12,10 +12,12 @@ export class SimplisticTimerComponent implements OnInit {
   svgDiv: ElementRef;
 
   //viewBox properties
-  viewBoxDimensions:string = '-85 42 391 198';
+  viewBoxDimensions:string = '0 0 160 160';
   //default
+  baseTransform:string = 'translate(-32,-50)';
 
   svgConfig = {
+    fillDefault: '0 0 160 160',
     fillSmall: '8 42 211 198',
     fillLarge: '-85 42 391 198',
     fillVertical: '8 -102 211 328',
@@ -48,28 +50,16 @@ export class SimplisticTimerComponent implements OnInit {
     //get the current parent div dimensions
     this.parentDivDimensions.width = this.svgDiv.nativeElement.offsetWidth;
     this.parentDivDimensions.height = this.svgDiv.nativeElement.offsetHeight;
-    // console.log(this.parentDivDimensions.width);
-    // console.log(this.parentDivDimensions.height);
+    console.log(this.parentDivDimensions.width);
+    console.log(this.parentDivDimensions.height);
     //if parent div width > 1300 push big config else small
-    if(this.parentDivDimensions.width > 1300 && this.parentDivDimensions.height > 900){
+
+    if(this.parentDivDimensions.width > 1000 && this.parentDivDimensions.height > 900){
       this.viewBoxDimensions = this.svgConfig.fillLarge;
-      // console.log("Pushing larger config");
+      this.baseTransform = 'translate(0,0)';
+      console.log("Pushing larger config");
      }
-    else if(this.parentDivDimensions.width < 1000 && this.parentDivDimensions.width > 300 &&
-            this.parentDivDimensions.height < 1000 && this.parentDivDimensions.height > 200){
-      this.viewBoxDimensions = this.svgConfig.fillSmall;
-      // console.log("Pushing smaller config");
-     }
-    //for vertical displays
-    else if(this.parentDivDimensions.width < 500 && this.parentDivDimensions.height < 300 &&
-             this.parentDivDimensions.width > 250 && this.parentDivDimensions.height > 300){
-      this.viewBoxDimensions = this.svgConfig.fillVertical;
-      // console.log("Pushing phone config")
-    }
-    //custom configs
-    else if(this.parentDivDimensions.width < 220 && this.parentDivDimensions.height < 300){
-      this.viewBoxDimensions = this.svgConfig.fillcustom1;
-     }
+
   }
 
 
