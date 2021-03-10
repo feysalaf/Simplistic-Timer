@@ -57,13 +57,27 @@ export class SimplisticTimerComponent implements OnInit {
     // console.log(this.parentDivDimensions.height);
     //if parent div width > 1300 push big config else small
 
-    if(this.parentDivDimensions.width > 1000 && this.parentDivDimensions.height > 500){
+    if(this.parentDivDimensions.width > 1200
+      && this.parentDivDimensions.width < 1400
+      && this.parentDivDimensions.height > 600
+      && this.parentDivDimensions.height < 800
+      ){
       this.viewBoxDimensions = this.svgConfig.fillLarge;
       this.baseTransform = 'translate(0,0)';
       }
+    else if(
+      this.parentDivDimensions.width > 1800
+      && this.parentDivDimensions.width < 2000
+      && this.parentDivDimensions.height > 900
+      && this.parentDivDimensions.height < 1100
+      ){
+      this.viewBoxDimensions = this.svgConfig.fillLarge;
+      this.baseTransform = 'translate(0,0)';
+       }
     else{
       this.baseTransform = this.TransformDict.TransformCenter;
       this.viewBoxDimensions = this.svgConfig.fillDefault;
+
     }
 
   }
