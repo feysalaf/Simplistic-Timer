@@ -53,8 +53,8 @@ export class SimplisticTimerComponent implements OnInit {
     //get the current parent div dimensions
     this.parentDivDimensions.width = this.svgDiv.nativeElement.offsetWidth;
     this.parentDivDimensions.height = this.svgDiv.nativeElement.offsetHeight;
-    console.log(this.parentDivDimensions.width);
-    console.log(this.parentDivDimensions.height);
+    // console.log(this.parentDivDimensions.width);
+    // console.log(this.parentDivDimensions.height);
     //if parent div width > 1300 push big config else small
 
     if(this.parentDivDimensions.width > 1000 && this.parentDivDimensions.height > 500){
