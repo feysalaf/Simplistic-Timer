@@ -14,8 +14,14 @@ export class RedCircleTimerComponent implements OnInit {
   //viewBox properties
   viewBoxDimensions:string = '-90 42 391 198';
   //default
+  baseTransform:string;
+
+  TransformDict = {
+    TransformCenter:'translate(-21.4,-53)'
+  }
 
   svgConfig = {
+    fillDefault: '0 0 175 175',
     fillSmall: '8 42 211 198',
     fillLarge: '-85 42 391 198',
     fillVertical: '1.5 -102 211 328',
@@ -32,27 +38,35 @@ export class RedCircleTimerComponent implements OnInit {
     //get the current parent div dimensions
     this.parentDivDimensions.width = this.svgDiv.nativeElement.offsetWidth;
     this.parentDivDimensions.height = this.svgDiv.nativeElement.offsetHeight;
-
+    // console.log(this.parentDivDimensions.width);
+    // console.log(this.parentDivDimensions.height);
     //if parent div width > 1300 push big config else small
-    if(this.parentDivDimensions.width > 1300 && this.parentDivDimensions.height > 500){
+
+    if(this.parentDivDimensions.width > 1200
+      && this.parentDivDimensions.width < 1400
+      && this.parentDivDimensions.height > 600
+      && this.parentDivDimensions.height < 800
+      ){
       this.viewBoxDimensions = this.svgConfig.fillLarge;
-
-     }
-    else if(this.parentDivDimensions.width < 1000 && this.parentDivDimensions.width > 300 &&
-            this.parentDivDimensions.height < 1000 && this.parentDivDimensions.height > 200){
-      this.viewBoxDimensions = this.svgConfig.fillSmall;
-
-     }
-     //for vertical displays
-     else if(this.parentDivDimensions.width < 500 && this.parentDivDimensions.height < 300 &&
-              this.parentDivDimensions.width > 250 && this.parentDivDimensions.height > 300){
-       this.viewBoxDimensions = this.svgConfig.fillVertical;
+      this.baseTransform = 'translate(0,0)';
       }
-     //custom configs
-     else if(this.parentDivDimensions.width < 220 && this.parentDivDimensions.height < 300){
-       this.viewBoxDimensions = this.svgConfig.fillcustom1;
-      }
+    else if(
+      this.parentDivDimensions.width > 1800
+      && this.parentDivDimensions.width < 2000
+      && this.parentDivDimensions.height > 900
+      && this.parentDivDimensions.height < 1100
+      ){
+      this.viewBoxDimensions = this.svgConfig.fillLarge;
+      this.baseTransform = 'translate(0,0)';
+       }
+    else{
+      this.baseTransform = this.TransformDict.TransformCenter;
+      this.viewBoxDimensions = this.svgConfig.fillDefault;
+
+    }
+
   }
+
 
   tabcheck = false;
 
